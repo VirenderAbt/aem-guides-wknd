@@ -1,10 +1,14 @@
-name: Lint using super-linter
+name: Lint codebase
 
-on: [pull_request]
+on: 
+  push:
+    branches: [feature-102]
+  pull_request:
+    branches-ignore: [dev]
 
 jobs:
   lint:
-    name: Lint using super-linter
+    name: using super-linter
     runs-on: ubuntu-latest
 
     permissions:
@@ -17,17 +21,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Super-linter
-        uses: super-linter/super-linter@v5.7.2
+      - name: Git pull to get the latest changes
+        run:
+          git pull origin feature-102
+
+      - name: Super-Linter
+        uses: super-linter/super-linter@v6.7.0
+      
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IGNORE_GENERATED_FILES: true
           IGNORE_GITIGNORED_FILES: true
           VALIDATE_ALL_CODEBASE: false
-          validate_html: true
-          validate_javascript: true
-          validate_json: true
-          validate_java: true
-          validate_xml: true
-          validate_css: true
-          validate_scss: true
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_JAVA: true
