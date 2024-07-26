@@ -1,4 +1,4 @@
-name: Lint codebase using super-linter
+name: Lint codebase
 
 on: 
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   lint:
-    name: Lint using super-linter
+    name: using super-linter
     runs-on: ubuntu-latest
 
     permissions:
