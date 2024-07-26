@@ -14,7 +14,7 @@ Write-Output "***Cloud Manager Login Done***"
 
 # Reset RDE. This will delete all the existing code packages and configurations.
 Write-Output "***Resetting RDE***"
-#aio aem:rde:reset
+aio aem:rde:reset
 Write-Output "***Reset Done***"
 
 # Deploy
