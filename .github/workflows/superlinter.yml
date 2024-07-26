@@ -1,6 +1,10 @@
-name: Lint using super-linter
+name: Lint codebase using super-linter
 
-on: [pull_request]
+on: 
+  push:
+    branches: [feature-102]
+  pull_request:
+    branches-ignore: [dev]
 
 jobs:
   lint:
@@ -17,8 +21,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Super-linter
-        uses: super-linter/super-linter@v5.7.2
+      - name: Git pull to get the latest changes
+        run:
+          git remote add adobe https://${USER_NAME}:${USER_PWD}@${TARGET_REPO}
+
+      - name: Super-Linter
+        uses: super-linter/super-linter@v6.7.0
+      
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IGNORE_GENERATED_FILES: true
