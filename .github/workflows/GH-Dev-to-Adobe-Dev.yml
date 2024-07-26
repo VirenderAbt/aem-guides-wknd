@@ -1,5 +1,5 @@
-# This workflow mirrors the code to the wknd.site repository
-name: Deploy to WKND.site Production
+# This workflow mirrors the code from GitHub branch to the adobe repository
+name: Deploy to Adobe65-Sandbox Dev Environment
 env:
   # Target repository
   TARGET_REPO: ${{ vars.ADOBE65_SANDBOX_REPO}}
@@ -9,7 +9,7 @@ env:
   USER_NAME: ${{ vars.ADOBE65_SANDBOX_REPO_USER_NAME}}
   USER_PWD: ${{ secrets.ADOBE65_SANDBOX_REPO_PASSWORD}}
 
-# Only run on a push to master branch
+# Only run on a push to DEV branch
 on:
   push:
     branches: [ dev ]
@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout Gibhut project
+      # Checkout project
       - uses: actions/checkout@v2
         with:
           fetch-depth: '0'
 
-      - name: Add WKND remote
+      - name: Add adobe remote
         run:
           git remote add adobe https://${USER_NAME}:${USER_PWD}@${TARGET_REPO}
 
@@ -39,7 +39,3 @@ jobs:
       - name: Push changes to ADOBE65_SANDBOX_REPO_BRANCH_DEV
         run:
           git push -u -v adobe ${TARGET_BRANCH_DEV} --force
-
-      #- name: Push changes to WKND Production
-      #  run:
-      #    git push -u wknd master:${TARGET_BRANCH_PROD}
