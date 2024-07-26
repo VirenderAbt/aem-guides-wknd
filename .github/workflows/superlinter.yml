@@ -33,10 +33,11 @@ jobs:
           IGNORE_GENERATED_FILES: true
           IGNORE_GITIGNORED_FILES: true
           VALIDATE_ALL_CODEBASE: false
-          validate_html: true
-          validate_javascript: true
-          validate_json: true
-          validate_java: true
-          validate_xml: true
-          validate_css: true
-          validate_scss: true
+          #validate_html: true
+          validate_yaml: false
+          #validate_javascript: true
+          #validate_json: true
+          #validate_java: true
+          #validate_xml: true
+          #validate_css: true
+          #validate_scss: true
