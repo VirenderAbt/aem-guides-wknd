@@ -23,7 +23,7 @@ jobs:
 
       - name: Git pull to get the latest changes
         run:
-          git remote add adobe https://${USER_NAME}:${USER_PWD}@${TARGET_REPO}
+          git pull origin feature-102
 
       - name: Super-Linter
         uses: super-linter/super-linter@v6.7.0
