@@ -66,6 +66,12 @@
         <wknd-shared.version>3.1.0</wknd-shared.version>
         <wknd-shared.65.version>2.2.2</wknd-shared.65.version>
         <aemanalyser.version>1.5.8</aemanalyser.version>
+
+        <releaseRepository-Id>central</releaseRepository-Id>
+        <releaseRepository-URL>https://artifactory-ent.devops.abbott:443/artifactory/bts-aem-191-maven-snapshots-local</releaseRepository-URL>
+        <snapshotRepository-Id>snapshots</snapshotRepository-Id>
+        <snapshotRepository-URL>https://artifactory-ent.devops.abbott:443/artifactory/bts-aem-191-maven-snapshots-local</snapshotRepository-URL>
+    
     </properties>
 
     <organization>
