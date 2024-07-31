@@ -15,24 +15,15 @@
  */
 package com.adobe.aem.guides.wknd.core.models.impl;
 
-import com.adobe.aem.guides.wknd.core.models.ImageList;
-import com.adobe.cq.wcm.core.components.models.Image;
-import com.adobe.cq.wcm.core.components.models.datalayer.ComponentData;
-import com.adobe.cq.wcm.core.components.models.datalayer.builder.DataLayerBuilder;
-import com.adobe.cq.wcm.core.components.util.ComponentUtils;
-import com.day.cq.commons.jcr.JcrConstants;
-import com.day.cq.search.Predicate;
-import com.day.cq.search.PredicateConverter;
-import com.day.cq.search.PredicateGroup;
-import com.day.cq.search.QueryBuilder;
-import com.day.cq.search.eval.JcrPropertyPredicateEvaluator;
-import com.day.cq.search.eval.PathPredicateEvaluator;
-import com.day.cq.search.eval.TypePredicateEvaluator;
-import com.day.cq.wcm.api.Page;
-import com.day.cq.wcm.api.PageManager;
-import com.day.cq.wcm.api.components.ComponentContext;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.jcr.Session;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -52,15 +43,23 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.via.ResourceSuperType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import javax.jcr.Session;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
+import com.adobe.aem.guides.wknd.core.models.ImageList;
+import com.adobe.cq.wcm.core.components.models.Image;
+import com.adobe.cq.wcm.core.components.models.datalayer.ComponentData;
+import com.adobe.cq.wcm.core.components.models.datalayer.builder.DataLayerBuilder;
+import com.adobe.cq.wcm.core.components.util.ComponentUtils;
+import com.day.cq.commons.jcr.JcrConstants;
+import com.day.cq.search.Predicate;
+import com.day.cq.search.PredicateConverter;
+import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.eval.JcrPropertyPredicateEvaluator;
+import com.day.cq.search.eval.PathPredicateEvaluator;
+import com.day.cq.search.eval.TypePredicateEvaluator;
+import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageManager;
+import com.day.cq.wcm.api.components.ComponentContext;
 
 @Model(
         adaptables = {SlingHttpServletRequest.class},
@@ -101,7 +100,7 @@ public class ImageListImpl implements ImageList {
     private List<ImageList.ListItem> imageListItems;
 
     @Override
-    public final Collection<ImageList.ListItem> getListItems() {
+    public final List<ImageList.ListItem> getListItems() {
         if (imageListItems == null) {
             if (coreList == null) {
                 log.warn("Could not locate the AEM WCM Core Components List SlingModel via this component's ResourceSuperType. Returning an empty list.");
@@ -114,8 +113,8 @@ public class ImageListImpl implements ImageList {
                         .collect(Collectors.toList());
             }
         }
-
-        return ImmutableList.copyOf(imageListItems);
+        return List.copyOf(imageListItems);
+        //return ImmutableList.copyOf(imageListItems);
     }
 
     @Override
@@ -227,7 +226,7 @@ public class ImageListImpl implements ImageList {
             return componentResources;
         }
 
-        final Map<String, String> params = ImmutableMap.<String, String>builder().
+        /*final Map<String, String> params = ImmutableMap.<String, String>builder().
                 put(PathPredicateEvaluator.PATH, page.getContentResource().getPath()).
                 put(TypePredicateEvaluator.TYPE, JcrConstants.NT_UNSTRUCTURED).
                 put(JcrPropertyPredicateEvaluator.PROPERTY, JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY).
@@ -237,8 +236,19 @@ public class ImageListImpl implements ImageList {
                 put(Predicate.ORDER_BY, "@jcr:path").
                 put(Predicate.ORDER_BY + "." + Predicate.PARAM_SORT , Predicate.SORT_ASCENDING).
                 build();
+                */
 
-        final long start = System.currentTimeMillis();
+        final Map<String, String> params = new HashMap<String, String>();               
+                params.put(PathPredicateEvaluator.PATH, page.getContentResource().getPath());
+                params.put(TypePredicateEvaluator.TYPE, JcrConstants.NT_UNSTRUCTURED);
+                params.put(JcrPropertyPredicateEvaluator.PROPERTY, JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY);
+                params.put(JcrPropertyPredicateEvaluator.PROPERTY + "." + JcrPropertyPredicateEvaluator.VALUE, slingResourceType);
+                params.put(PredicateConverter.GROUP_PARAMETER_PREFIX + "." + PredicateGroup.PARAM_LIMIT, String.valueOf(limit));
+                params.put(PredicateConverter.GROUP_PARAMETER_PREFIX + "." +  PredicateGroup.PARAM_GUESS_TOTAL, "true");
+                params.put(Predicate.ORDER_BY, "@jcr:path");
+                params.put(Predicate.ORDER_BY + "." + Predicate.PARAM_SORT , Predicate.SORT_ASCENDING);
+
+                final long start = System.currentTimeMillis();
 
         final Iterator<Resource> resources = queryBuilder.createQuery(PredicateGroup.create(params),
                 request.getResourceResolver().adaptTo(Session.class)).getResult().getResources();

@@ -2,13 +2,11 @@ name: Lint codebase
 
 on: 
   push:
-    branches: [feature-102]
-  pull_request:
-    branches-ignore: [dev]
+    branches: [feature-102, dev]  
 
 jobs:
   lint:
-    name: using super-linter
+    name: Lint codebase using super-linter
     runs-on: ubuntu-latest
 
     permissions:

@@ -28,10 +28,11 @@ Write-Output "***Deployed Code packages (ALL)***"
 #Write-Output "***Deployed UI.Apps***"
 #aio aem:rde:install -t osgi-config ui.config/target/*.zip
 #Write-Output "***Deployed UI.Config***"
-
-aio aem:rde:install -t content-package ui.content/target/aem-guides-wknd.ui.content-3.2.1-SNAPSHOT.zip
-Write-Output "***Deployed UI.Content***"
-aio aem:rde:install -q -t frontend ui.frontend/target/aem-guides-wknd.ui.frontend-3.2.1-SNAPSHOT.zip
+#aio aem:rde:install -t content-package ui.content/target/aem-guides-wknd.ui.content-3.2.1-SNAPSHOT.zip
+#Write-Output "***Deployed UI.Content***"
+#aio aem:rde:install -q -t frontend ui.frontend/target/aem-guides-wknd.ui.frontend-3.2.1-SNAPSHOT.zip
 Write-Output "***Deployed UI.Frontend***"
+aio aem:rde:install -q -t dispatcher-config dispatcher/target/aem-guides-wknd.dispatcher.cloud-3.2.1-SNAPSHOT.zip
+Write-Output "***Deployed dispatcher***"
 
 Write-Output "***Deployment Completed***"

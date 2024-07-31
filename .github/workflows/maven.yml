@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-
+    name: Build & Unit Test on Github Actions
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -39,3 +39,7 @@ jobs:
       # Build & Test
       - name: Build & Test with Maven
         run: mvn clean install ${{ matrix.profile }}
+
+      # At this point we should push to RDE
+      - name: Push to RDE
+        run: echo "Push to RDE"

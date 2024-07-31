@@ -59,13 +59,19 @@
         <bnd.version>5.1.2</bnd.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aem.sdk.api>2023.7.12874.20230726T072051Z-230702</aem.sdk.api>
+        <aem.sdk.api>2024.7.17258.20240726T172406Z-240700</aem.sdk.api>
         <componentGroupName>WKND Site</componentGroupName>
         <core.wcm.components.version>2.25.4</core.wcm.components.version>
         <uber.jar.version>6.5.17</uber.jar.version>
         <wknd-shared.version>3.1.0</wknd-shared.version>
         <wknd-shared.65.version>2.2.2</wknd-shared.65.version>
-        <aemanalyser.version>1.5.8</aemanalyser.version>
+        <aemanalyser.version>1.6.0</aemanalyser.version>
+
+        <releaseRepository-Id>abbott-artifactory-releases</releaseRepository-Id>
+        <releaseRepository-URL>https://artifactory-ent.devops.abbott:443/artifactory/bts-aem-191-maven-local</releaseRepository-URL>
+        <snapshotRepository-Id>abbott-artifactory-snapshots</snapshotRepository-Id>
+        <snapshotRepository-URL>https://artifactory-ent.devops.abbott:443/artifactory/bts-aem-191-maven-snapshots-local</snapshotRepository-URL>
+    
     </properties>
 
     <organization>
@@ -360,6 +366,9 @@ Bundle-DocURL:
                     <artifactId>aemanalyser-maven-plugin</artifactId>
                     <version>${aemanalyser.version}</version>
                     <extensions>true</extensions>
+                    <configuration>
+                        <strictValidation>true</strictValidation>
+                    </configuration>
                 </plugin>
                 <!-- Content Package Plugin -->
                 <plugin>
