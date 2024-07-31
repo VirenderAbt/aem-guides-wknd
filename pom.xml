@@ -67,9 +67,9 @@
         <wknd-shared.65.version>2.2.2</wknd-shared.65.version>
         <aemanalyser.version>1.6.0</aemanalyser.version>
 
-        <releaseRepository-Id>central</releaseRepository-Id>
-        <releaseRepository-URL>https://artifactory-ent.devops.abbott:443/artifactory/bts-aem-191-maven-snapshots-local</releaseRepository-URL>
-        <snapshotRepository-Id>snapshots</snapshotRepository-Id>
+        <releaseRepository-Id>abbott-artifactory-releases</releaseRepository-Id>
+        <releaseRepository-URL>https://artifactory-ent.devops.abbott:443/artifactory/bts-aem-191-maven-local</releaseRepository-URL>
+        <snapshotRepository-Id>abbott-artifactory-snapshots</snapshotRepository-Id>
         <snapshotRepository-URL>https://artifactory-ent.devops.abbott:443/artifactory/bts-aem-191-maven-snapshots-local</snapshotRepository-URL>
     
     </properties>

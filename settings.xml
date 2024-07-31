@@ -132,12 +132,12 @@ under the License.
     <server>
       <username>virender.choudhary@abbott.com</username>
       <password>cmVmdGtuOjAxOjE3NTM3OTk3NjI6YVJpYjdzanFwekh5QVB3UkdDaU1XWU5ET3JP</password>
-      <id>central</id>
+      <id>abbott-artifactory-releases</id>
     </server>
     <server>
       <username>virender.choudhary@abbott.com</username>
       <password>cmVmdGtuOjAxOjE3NTM3OTk3NjI6YVJpYjdzanFwekh5QVB3UkdDaU1XWU5ET3JP</password>
-      <id>snapshots</id>
+      <id>abbott-artifactory-snapshots</id>
     </server>
     </servers>
 
